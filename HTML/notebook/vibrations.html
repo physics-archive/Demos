@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>       
+        <script>
+            MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              },
+              svg: {
+                fontCache: 'global'
+              }
+            };
+            </script>
+        
+        <script type="text/javascript" src="../../MathJax3/es5/tex-chtml.js"></script>
+        
+        <title>Vibr. Characterization</title>
+        <link rel="stylesheet" type="text/css" href="./vibrations.css?ver=0.2" /> <!--links CSS style sheet-->
+    
+
+        $\newcommand{\vect}[1]{\mathrm{ \vec{\boldsymbol{#1}}}} $ <!--\vect to make bolded non-italic--> 
+        $\newcommand{\vecta}[3]{ 
+          \begin{bmatrix} #1\\ #2\\ #3 \end{bmatrix} <!--I do not remember what this does...-->
+    
+        } $ <!--3 vector takes 3 inputes-->
+        $\newcommand{\hata}[1]{\mathrm{ \hat{\boldsymbol{#1}}}} $ <!--\vect to make bolded non-italic--> 
+        $ \newcommand{\blbox}[1]{\bbox[8px,border:1px solid black]{#1}}$
+        $ \newcommand{\bblbox}[1]{\bbox[8px,border:3px solid black]{#1}}$
+
+        $ \newcommand{\ddp}[2]{ \frac{\partial ^2 {#1}}{\partial {#2}^2}} $ <!--second partial derivative 
+        w/ two arguments-->
+
+
+    </head>
+
+<body>
+
+<div id="buttons">
+
+        <div id="home" style="float:left;font-weight:bold;left:450px;">
+            <a class="home" href="../../index.html">Home Page</a>
+        </div> 
+    
+        <div id="nextpage" style="float:right;font-weight:bold;right:450px;">
+            <a class="nextpage" href="./local-g.html">Next Page</a>
+        </div>
+</div> <!--closes buttons-->
+
+<div id="container">
+    <h1 id="header">Characterizing Vibrations<br/> within a Sensitive Research Space<br />
+      <!-- <span id="small"> OMMENT UNDER THE TITLE
+        <a target="_blank" href="https://www.math.cmu.edu/~bwsulliv/basel-problem.pdf" style="color:darkslategrey">
+        See Carnegie-Mellon's 'Numberous Proofs to the Basel Problem' for Mathematical History and Analytical Solutions</a>
+      </span> -->
+    </h1> <hr/><hr/>
+
+
+    <!--<div id="header">
+      <h2 class="title">Convergence - Infinite Series Can Return a Finite Value <br /><span id="small"><a target="_blank" href="https://www.math.cmu.edu/~bwsulliv/basel-problem.pdf" style="color:darkslategrey">See Carnegie-Mellon's 'Numberous Proofs to the Basel Problem' for Mathematical History and Analytical Solutions</a></span></h2>
+  </div>--> <!--THIS IS PART OF trumpet.html. REFERENCE.-->
+    
+    <p class="problem"> <!-- <b></b> -->
+      <!--Using a Wilcoxon seismic accelerometer, -->
+      Within a research space: obtain velocity measurements (m/s-rms) in 
+      the frequency domain using one-third octave analysis. Compare these velocities against the International Standards Organization's (ISO) vibration criteria for structures.
+<br/><br/>Performed across multiple laboratory locations, including the frame 
+of a Bluefors Dilution Refrigerator measurement system.
+<!--
+  $$ \omega_{mn} =\pi v \sqrt{\frac{m^2}{a^2}+\frac{n^2}{b^2}} $$
+
+  where m and n are positive integers (pp. 6).
+</p> -->
+ 
+      <!--Later, we will return to closely
+      examine $\Psi$ and its perplexing properties from the beginning.
+      Consider this page a motivating preface to a volume on early Quantum Particle Mechanics.
+      </p>-->
+      <hr/><hr/><h3 id="section">Acknowledgements Requried</h3>
+<p>
+  This research was conducted in 2021 for UConn's Department of Physics, and was intended by Dr. Ilya Sochnikov as a follow-up
+  to a 2019 paper co-authored by himself and a previous student, Jonah Cerbin: 
+  <a class="citation" href="https://pubs.aip.org/aip/rsi/article-lookup/doi/10.1063/1.5112088" target="blank">
+    <i>Isolation solution for extreme environmental vibrations for quantum-enabling cryogenic setups installed on raised frames</i>. </a>
+  
+
+    <br/><br/>
+    My research would not have been possible without Mr. Cerbin and Dr. Sochnikov's detailed investigation, nor without Dr. Sochnikov's laboratory resources. 
+    Supplementary resources to the 2019 paper were crucial when writing and reviewing my original MATLAB code during 2021.
+
+
+</p>
+      <hr/><h3 id="section">Introduction</h3>
+      <p>This module will provide a ground-up demonstration of how signal analysis is performed, starting from the raw voltage inputs of a seismic accelerometer.
+        A review of the following are necessary -- ordered from lowest-level to highest-level:
+        <ul>
+        <li>Mathematical methods: Fourier analysis, octave analysis, power spectrum density, and Fast Fourier Transforms</li>
+        <li>Experimental Methods: Accelerometers, amplifiers and oscilloscopes</li>
+        <li>MATLAB scripting: vectorization, nested for loops, and sorting</li>
+      </ul>
+    
+    </p>
+
+      <hr/><h3 id="section">Motivations</h3>
+  
+      <p>
+        A set of Vibration Criteria (VC) are used to evaluate the magnitude of external vibrations within a sensitive research facility.  
+        The vibration-sensitive instrument of focus is Bluefors' LD closed-cycle Dilution Refrigerator System.
+        <br/><br/>
+        Dilution refrigerators may achieve temperatures in the milikelvin-range (mK). Here,
+        as quantum phenomena emerge, random movement of a system is generally unwanted. For dilution refrigerators, 
+        significant vibrations may affect cooling cycle(s), and will inhibit any technology involved in measurement, 
+        scanning, and imaging. 
+        <br/><br/>
+        Given the obligatory low-noise conditions of these research spaces, it is adavantageous to characterize vibrations in the space, 
+        even if one does not intend to implement any solutions to attenuate and reduce vibrations.
+    
+      </p>
+
+      <hr/><h3 id="section">Experimental Methods</h3>
+      The following instruments were used to obtain raw, time-trace accelerometer data in Volts (V):
+
+      <ul>
+        <li>Wilcoxon 731a Ultra Low-Frequency Accelerometer
+          <sup><a class="citation" href="../../Index/Research/vibrchr/731A-spec-98078E.2cc.pdf" target="blank">[1]</a></sup>
+        </li> 
+        
+        <li>Wilcoxon P31 Ultra Low Noise Power Unit/Amplifier 
+        <sup><a class="citation" href="../../Index/Research/vibrchr/P31_spec_98443J.1c.pdf" target="blank">[2]</a></sup>
+      </li>
+      
+      <li>Owon VDS 1022 Oscilloscope for PC
+        <sup><a class="citation" href="../../Index/Research/vibrchr/OWON-VDS.pdf" target="blank">[3]</a></sup>
+
+      </li></ul>
+      <p>
+        Signals are detected by the accelerometer's electrical components, passed through the amplifier to achieve gain, and then fed to the oscilloscope for recording. 
+        Data are exported from the oscilloscope as time-trace voltages. The accelerometer's product manual provides the rates for converting voltage (V) to
+       acceleration (m/s<sup>2</sup>).
+
+     </p>
+      <!-- <hr/><h3 id="section">Mathematical Methods: Spectral Analysis</h3> -->
+
+      <hr/><h3 id="section">Math Methods: Discrete Fourier Transforms</h3>
+      Fourier analysis is the lowest-level concept to be covered in this module, 
+      providing the fundamental algorithm(s) which enable spectral methods. For a deeper mathematical-approach,
+      look into properties of unitary matrices, singular value decomposition, and the DFT matrix
+      (<a class="citation" href="https://link.springer.com/book/10.2991/978-94-6239-009-6" target="blank">Chui & Jiang, 2013, pg. 171</a>).
+      </p>
+      
+      <p>These acceleration data are measured in the time domain, but meaningful signal analysis 
+        occurs when one decomposes the energy contributions at each component frequency.
+        
+        Given a discrete, 1-D array of time-trace data (x<sub>k</sub>), one may transform between 
+        representations in the time and frequency domains using the following algorithm (and its inverse):
+      </p>
+
+      $$ \begin{align}
+      X_\ell = &\sum_{k=0}^{N-1} x_k e^{-i2\pi k\ell/N}\\
+      x_k = \frac{1}{N} &\sum_{l=0}^{N-1} X_\ell e^{-i2\pi \ell k/N}
+      \end{align}$$
+
+      <p></p>
+
+        <!-- <p>
+          Signal analysis necessitates the use of computational methods for the following reasons: 
+          <ul>
+            <li>Signal analysis uses algorithms which are realistically performed only by machine. 
+              A gold standard is the Fast Fourier Transform (FFT), which is used extensively in this research.</li>
+            <li>Data sets tend to be very large in size, with thousands to millions of signals per array.</li>
+        </ul>
+          
+          During data analysis, over 100,000 unique measurements were passed through the computational engine (a MATLAB script). 
+          
+        </p> -->
+        <!-- CUT BULLET POINTS PROVIDING MOTIVATION FOR COMPTUTING-->
+      
+      <hr/><h3 id="section">Data Analysis: MATLAB Code Review</h3>
+      <p>
+        
+      </p>
+
+
+      <!-- <hr/><h3 id="section"></h3> -->
+
+
+
+
+</div>
+
+
+</body> <!--closes container-->
+
+<footer>
+    <br /><br /><br />Notes by &copy; Tyler DeFrancesco 2023 | BS Physics '21<br />Textbook and Problem by J.D. Jackson (1962)
+</footer>
+
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+        
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+        </script>
+    
+    <script type="text/javascript" src="../MathJax3/es5/tex-chtml.js"></script>
+    <link rel="stylesheet" type="text/css" href="./qm0.css?ver=1.7" /> <!--links CSS style sheet-->
+
+    $\newcommand{\vect}[1]{\mathrm{ \vec{\boldsymbol{#1}}}} $ <!--\vect to make bolded non-italic--> 
+    $\newcommand{\vecta}[3]{ 
+      \begin{bmatrix} #1\\ #2\\ #3 \end{bmatrix}
+
+    } $ <!--3 vector takes 3 inputes-->
+    $\newcommand{\hata}[1]{\mathrm{ \hat{\boldsymbol{#1}}}} $ <!--\vect to make bolded non-italic--> 
+    $ \newcommand{\blbox}[1]{\bbox[8px,border:1px solid black]{#1}}$
+
+
+    <title>Quantum Mechs 0</title>
+</head>
+
+
+<body>
+    <div id="buttons">
+
+    <div id="home" style="float:left;font-weight:bold;left:450px;">
+        <a class="home" href="../index.html">Home Page</a>
+    </div> 
+
+    <div id="nextpage" style="float:right;font-weight:bold;right:450px;">
+        <a class="nextpage" href="./qm0-2.html">Next Page</a>
+    </div>
+
+
+</div> <!--broken in every page except trumpet-->
+  
+
+<div id="container">
+<h1 id="header">System Information in Quantum Mechanics<br/></h1>
+
+<div id="transformation">
+<div id="intro"> 
+
+<p>Quantum mechanics is an abrupt shift in interpretation from our classical models. In Schr&ouml;dinger's model
+  for particle mechanics, the function describing classical position $x(t)$ is replaced with
+  a statistical object that we call the wavefunction $ \Psi(x,t)$. 
+</p>  
+<!--Later, we will return to closely
+examine $\Psi$ and its perplexing properties from the beginning.
+Consider this page a motivating preface to a volume on early Quantum Particle Mechanics.
+</p>-->
+  <!--Let us motivate a study into quantum mechanics by showcasing a
+  directly-observable consequence of the wavefunction $\Psi$.-->
+
+<ul id="introlist"><li><b>In Classical Mechanics</b>: <i>a particle's dynamics are completely described by 
+its position $x(t)$ over time <i>t</i>. Solves a second-order <u>ordinary</u> differential equation</i>.</li>
+<li><b>In Schr&ouml;dinger's Quantum Mechanics</b>: <i>information about a particle system is encoded 
+ in a probability wavefunction, $\Psi(x,t)$, which spreads across space and evolves in time. Solves a linear <u>partial</u> differential equation</i>.</li></ul>
+<hr/><h3 id="section">Motion in Newtonian Mechanics</h3>
+
+<p>To understand how $\Psi(x,t)$ provides observable information, we need to explore how particles are desccribed 
+  for classical systems. In Newton's formulation, a particle's 
+  position [in time] is described by the differential equation:
+</p>
+<p>$$ \bbox[8px,border:1px solid black] {\vect{F}= \frac{d\vect{p}}{dt} = m \frac{d^2\vect{r}}{dt^2}} \tag{Eq. 1}$$ 
+</p>
+<p id="eqnote"><b>Eq. 1</b> - Newton's equation of motion states that acceleration is the second
+time-derivative of system position. If a system's mass is non-constant, <i>m</i> is not a scalar.</p>
+
+<p>Solutions to (Eq. 1) form a solution set for the system's motion over all time and space (i.e. deterministic model for motion). 
+  
+This ordinary differential equation (ODE) leads to our familiar relationships between $x(t)$ $v(t)$ and $a(t)$:</p>
+$$ \bbox[8px,border:1px solid black] {a(t) = \frac{d v(t)}{dt} = \frac{d^2 x(t)}{dt^2}}$$
+
+<!--<p>Since Schr&ouml;dinger's Equation is an energy conservation equation, let change (Eq. 1) using 
+  calculus' chain rule so that it too is a statement about energy conservation. Reacll that $\ddot{x}$ is
+  the first time-derivative of velocity:
+</p>
+
+$$ \begin{align} 
+\vec{F} &= m \frac{dv}{dt} \\
+&= m \frac{dv}{dx} \cancelto{v(t)}{\frac{dx}{dt}} \\
+&= m \frac{dv}{dx} v(t) \\
+&= m \frac{dv}{dx} \frac{d ( \frac{v^2}{2})}{dv} \\
+\vec{F} 
+&= \bbox[8px,border:1px solid black]{ \frac{1}{2} m \frac{d}{dx} \left[v^2\right]}
+\end{align}$$-->
+
+
+
+
+<hr/><h3>Motion and Energy in Schr&ouml;dinger's Quantum Mechanics</h3>
+<p>Schr&ouml;dinger's analog to Newton's Equation is a complex-valued energy conservation equation:</p>
+
+$$
+\bbox[8px,border:1px solid black]{
+  i \hbar \frac{\partial{\Psi(x,t)}}{\partial{t}} = - \frac{\hbar^2}{2m} \frac{\partial^2 \Psi}{\partial x^2} + V(x,t) \Psi(x,t)
+} \tag{Eq. 2}
+$$
+<p id="eqnote"><b>Eq. 2</b> - Schr&ouml;dinger's Equation for the energy and motion of a particle. Partial differential equation whose solutions are functions of both position and time: $\Psi(x,t)$.</p>
+
+<p>This is a linear, second-order, partial differential equation, with a similar form to
+  the wave equation. Obtaining analytical solutions to this PDE 
+  for a given system potential, $V(x,t)$, is almost never trivial and often it is impossible. 
+  
+</p>
+<hr/><h3 id="secheader">Where is Classical Position Encoded in Schr&ouml;dinger's Equation?</h3>
+
+<p>While (Eq. 2) is bizarre in comparison to the Newtonian notion for system motion, our models <u>must</u> agree 
+within classical limits of any system. If classical mechanics accurately predicts and explains
+behaviors for many [mainly macroscopic] systems, then those classical solutions should appear 
+in our quantum-mechanical mathematics as well. 
+<ul id="introlist"><li>In other words, we need to verify that classical mechanics 
+  actually <i>is</i> an approximation for qunantum mechanics.</li>
+</ul></p>
+
+
+
+<p>Schr&ouml;dinger's equation
+  has solutions not of $x(t)$, but of a wavefunction $\Psi(x,t)$. The square-amplitude of $\Psi$ is related to $x(t)$ 
+  statistically (Gasiorowicz, pp. 46):
+</p>
+<span>
+  $$
+  \bbox[8px,border:1px solid black]{ \lt x \gt = \int_{- \infty}^{+ \infty} \left[\Psi^* x\ \Psi \right]\ dx} \tag{Eq. 3}$$ 
+</span>
+
+<p id="eqnote"><b>Eq. 3</b> - Expectation value for position as a function of time. 
+  Here, $\Psi^*(x,t)$ denotes the complex conjugate of $\Psi(x,t)$.</p>
+<p>In quantum mechanics, $ \hat{x}$ 
+  is an operator (i.e. $\hat{x}$ represents the operator for position). Operating on $\Psi$ is how
+  observable behavior is predicted based on solutions sets to Schr&ouml;dinger's equation. 
+<!--<br/><br/>Operator algebra and commutivity starts to play a crucial role in understanding the mathematics of 
+physics, leading to a "type of math" that is entirely absent from undergraduate-level classical mechanics. -->
+  
+<ul><li>The wavefunction is not directly observable, yet its probability density (|$\Psi^2$|) 
+  <a class="link" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.110.213001" target="_blank">may be imaged</a> with very modern technology.</li></ul>
+  
+  <ul>
+    
+    <!--<li>This is a bizarre way of describing a system's motion; it is highly indirect in comparison to classical mechanics,
+which has solutions to its diff. eq. that are directly observable $x(t)$.</li> -->
+<li>Here, $\lt x(t) \gt$ is the probability of finding our particle between $- \infty$ and $+ \infty$ (entire <i>x</i>-axis). This boundary may be finite, and 
+  (Eq. 3) must be a convergent integral if it is to be valid (Gasiorowicz, pp. 46).</li></ul></p>
+
+<hr/><h3 id="secheader">Operating on $\Psi(x,t)$</h3>
+
+
+</div> <!--Closes intro-->
+
+</div> <!--transforamtion-->
+
+</div></body> <!--Body and container closure-->
+
+
+
+    <footer>
+        <br /><br /><br />Notes by &copy; Tyler DeFrancesco 2023 | BS Physics '21<br />
+    </footer>
+
+
+</html>
