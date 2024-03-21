@@ -8,9 +8,9 @@ int main() {
     //  Initialize Variables //
     ///////////////////////////
     
-    int exponentBase = 3;
-    int exponentPow = 0;
-    int compareString[33]; = { };
+    double x = 3;
+    double p = 0;
+    int compareString[33] = { };
 
     ///////////////////////////
     //      String Array     //
@@ -33,19 +33,20 @@ int main() {
     for (int j = 0; j <= sizeof(runeTable) / sizeof(runeTable[0]) - 1; j = j + 1)
     {
         compareString[j] = strncmp(runeTable[j], runeCompare, 6);
-        //printf("Strncmp for runeTable (%s) vs stdin (%s): %d\n",runeTable[j],runeCompare,compareString);
-        
-        if (compareString == 0)
-        {
-
-        }
-    
-    
     }
     
-    //printf("%d", strlen(runeCompare));
+    ////////////////////////////
+    //  Computational Engine  //
+    ////////////////////////////
     
- 
+    //Operate on compareString until an element equal to zero is reached
+    int k = 0; 
+    while (compareString[k] != 0)
+    {
+        int product = pow(x, k + 1);
+        printf("%d\n", product);
+        k++;
+    }
 }
 
 //Problem: Strncmp behaving poorly. In array[j][k], high k will cause change in j. Actually this isn't true...
@@ -57,3 +58,5 @@ int main() {
 
     //string_in()
     //https://stackoverflow.com/questions/18806788/comparing-a-single-string-to-an-array-of-strings-in-c
+
+        //printf("Strncmp for runeTable (%s) vs stdin (%s): %d\n",runeTable[j],runeCompare,compareString);
