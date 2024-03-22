@@ -43,8 +43,8 @@ int main() {
     int k = 0; 
     while (compareString[k] != 0)
     {
-        int product = pow(x, k + 1);
-        printf("%d\n", product);
+        double product = pow(x, k + 1);
+        printf("%.0lf\n", product);
         k++;
     }
 }
@@ -59,4 +59,4 @@ int main() {
     //string_in()
     //https://stackoverflow.com/questions/18806788/comparing-a-single-string-to-an-array-of-strings-in-c
 
-        //printf("Strncmp for runeTable (%s) vs stdin (%s): %d\n",runeTable[j],runeCompare,compareString);
+    //printf("Strncmp for runeTable (%s) vs stdin (%s): %d\n",runeTable[j],runeCompare,compareString);
