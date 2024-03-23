@@ -48,10 +48,12 @@ int main() {
 
     while (compareString[k] != 0 && k < 33)
     {
-        if (k <= 21) { 
-            product = pow(x, k + 1); //Iterative exponentiation in base-3. Runes (k) 1 to 22.
+        if (k <= 21) 
+        { 
+            product = pow(3, k + 1); //Iterative exponentiation in base-3. Runes (k) 1 to 22.
         }
-        else {
+        else 
+        {
             product = pow(2, k + 1); //Iterative exponentiation in base-2. Runes (k) 22 to 33.
         }
         printf("%s: %.0lf\n", runeTable[k], product);
