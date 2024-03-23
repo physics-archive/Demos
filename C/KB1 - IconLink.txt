@@ -1,0 +1,18 @@
+Compile Code, generate resource file, link, -out.
+_________________________________________
+
+#########################################
+_________________________________________
+
+cl -c main.c
+rc program.rc
+link main.obj program.res -out:program.exe
+
+#########################################
+
+cl -c runes.c; rc icon.rc; link runes.obj icon.res -out:runes.exe
+
+#########################################
+
+Program.rc example contents:
+IDI_ICON_1 ICON "iconame.ico"
