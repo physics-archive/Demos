@@ -7,7 +7,7 @@ int main() {
     ///////////////////////////
     //  Initialize Variables //
     ///////////////////////////
-    char version[100] = "Alpha Ver. 0.1 - 03.22.24-01";
+    char version[100] = "Alpha Ver. 03.22.24-02";
 
     double x = 3;
     double p = 0;
@@ -18,10 +18,10 @@ int main() {
     ///////////////////////////
     printf("Diablo II Rune Calculator\n%s\n\n",version);
 
-    char runeTable[33][6] = {"El","Eld", "Tir", "Nef", "Eth", "Ith", "Tal",
+    char runeTable[34][6] = {"El","Eld", "Tir", "Nef", "Eth", "Ith", "Tal",
     "Ral", "Ort", "Thul", "Amn","Sol","Shael","Dol","Hel","Io","Lum",
     "Ko","Fal","Lem","Pul","Um","Mal","Ist","Gul","Vex","Ohm","Lo","Sur",
-    "Ber","Jah","Cham","Zod"};
+    "Ber","Jah","Cham","Zod",NULL};
 
     char runeCompare[8] = { }; // Limits to 7 byte string of characters
     printf("%s", "Desired rune: "); 
@@ -31,7 +31,8 @@ int main() {
     ///////////////////////////
     //     String Compare    //
     ///////////////////////////
-
+    
+    //Creates a 1x33 array of values equal to -1,0,1; there exists one arr[j]=0 and corresponds to  the user's input
     for (int j = 0; j <= sizeof(runeTable) / sizeof(runeTable[0]) - 1; j = j + 1)
     {
         compareString[j] = strncmp(runeTable[j], runeCompare, 6);
@@ -41,19 +42,21 @@ int main() {
     //  Computational Engine  //
     ////////////////////////////
     
-    //Operate on compareString until an element equal to zero is reached
+    //Operate conditionally on compareString until an element equal to zero is reached
     int k = 0;
     double product = 0;
-    while (compareString[k] != 0)
+    while (compareString[k] != 0 && compareString >= 33)
     {
-        if (k <= 21) {
-            product = pow(x, k + 1);
+        if (k <= 21) { 
+            product = pow(x, k + 1); //Iterative exponentiation in base-3. Runes (k) 1 to 22.
         }
         else {
-            product = pow(2, k + 1);
+            product = pow(2, k + 1); //Iterative exponentiation in base-2. Runes (k) 22 to 33.
         }
         printf("%s: %.0lf\n", runeTable[k], product);
         k++;
     }
+    free(runeTable);
+    free(compareString);
     getch();
 }
