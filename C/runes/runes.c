@@ -24,6 +24,7 @@ int main() {
     "Ko","Fal","Lem","Pul","Um","Mal","Ist","Gul","Vex","Ohm","Lo","Sur",
     "Ber","Jah","Cham","Zod"}; //6x34 array of characters. Static.
     
+    getUserInput:
     printf("%s", "Desired rune: "); 
     fgets(runeCompare, 8, stdin); // Gets user input for a fixed-size string
     runeCompare[strlen(runeCompare) - 1] = 0; // Trims 'Enter' artefact from runeCompare. Result of fgets.
@@ -38,6 +39,23 @@ int main() {
         compareString[j] = strncmp(runeTable[j], runeCompare, 6);
     }
     
+    ////////////////////////////
+    //  CONDITION: TERMINATE  //
+    ////////////////////////////
+    int summ = 0;
+    for (int h = 0; h <= sizeof(runeTable) / sizeof(runeTable[0]) - 1; h = h + 1)
+    {
+        if (compareString[h] == 0)
+        {
+            summ++;
+        }
+    }
+    if (summ == 0)
+    {
+        printf("Invalud rune name.\n\n");
+        goto getUserInput;
+    }
+
     ////////////////////////////
     //  Computational Engine  //
     ////////////////////////////    
@@ -57,6 +75,7 @@ int main() {
         {
             product = pow(2, k + 1); //Iterative exponentiation in base-2. Runes (k) 22 to 33.
         }
+        //idea: create a table "product[k]" and iterate backwards using k-- 
         printf("%s: %.0lf\n", runeTable[k], product);
         k++;
     }
