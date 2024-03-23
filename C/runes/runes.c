@@ -9,19 +9,20 @@ int main() {
     //  Initialize Variables //
     ///////////////////////////
     
-    char version[100] = "Alpha Ver. 03.22.24-02"; 
+    char version[100] = "Alpha Ver. 03.22.24-03"; 
     double p = 0; //2^p or 3^p 
     int compareString[33] = { };
     
     ///////////////////////////
     //      String Array     //
     ///////////////////////////
-    
+    printf("Diablo II Rune Calculator\n%s\n\n", version);
+
     char runeCompare[8] = { };
     char runeTable[34][6] = {"El","Eld", "Tir", "Nef", "Eth", "Ith", "Tal",
     "Ral", "Ort", "Thul", "Amn","Sol","Shael","Dol","Hel","Io","Lum",
     "Ko","Fal","Lem","Pul","Um","Mal","Ist","Gul","Vex","Ohm","Lo","Sur",
-    "Ber","Jah","Cham","Zod"}; //6x34 array of characters. Analog to a vector of strings
+    "Ber","Jah","Cham","Zod"}; //6x34 array of characters. Static.
     
     printf("%s", "Desired rune: "); 
     fgets(runeCompare, 8, stdin); // Gets user input for a fixed-size string
