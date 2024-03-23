@@ -61,6 +61,7 @@ int main() {
     int k = 0;
     double product = 0;
     double product_sifted = 0;
+    double productArray[33] = { };
 
     //Operate conditionally on compareString until an element equal to zero is reached
     while (compareString[k] != 0 && k < 33)
@@ -68,14 +69,16 @@ int main() {
         if (k <= 21) 
         { 
             product = pow(3, k + 1); //Iterative exponentiation in base-3. Runes (k) 1 to 22.
+            productArray[k] = product;
         }
         else 
         {
             product = pow(2, k + 1); //Iterative exponentiation in base-2. Runes (k) 22 to 33.
+            productArray[k] = product;
         }
         //idea: create a table "product[k]" and iterate backwards using k-- 
         //idea: place fgets in a while loop and exit if proper rune name is obtained. Cleaner.
-        printf("%s: %.0lf\n", runeTable[k], product);
+        printf("%s: %.0lf\n", runeTable[k], productArray[k]);
         k++;
     }
     getch();
