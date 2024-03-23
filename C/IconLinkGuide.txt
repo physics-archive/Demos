@@ -1,0 +1,9 @@
+Compile Code, generate resource file
+_____________________________________
+cl -c main.c
+rc program.rc
+link main.obj program.res -out:program.exe
+
+Program.rc example contents:
+_________________________________________
+IDI_ICON_1 ICON "myicon.ico"

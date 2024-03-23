@@ -7,7 +7,8 @@ int main() {
     ///////////////////////////
     //  Initialize Variables //
     ///////////////////////////
-    
+    char version[100] = "Alpha Ver. 0.1 - 03.22.24-01";
+
     double x = 3;
     double p = 0;
     int compareString[33] = { };
@@ -15,12 +16,13 @@ int main() {
     ///////////////////////////
     //      String Array     //
     ///////////////////////////
+    printf("Diablo II Rune Calculator\n%s\n\n",version);
 
     char runeTable[33][6] = {"El","Eld", "Tir", "Nef", "Eth", "Ith", "Tal",
     "Ral", "Ort", "Thul", "Amn","Sol","Shael","Dol","Hel","Io","Lum",
     "Ko","Fal","Lem","Pul","Um","Mal","Ist","Gul","Vex","Ohm","Lo","Sur",
     "Ber","Jah","Cham","Zod"};
-    
+
     char runeCompare[8] = { }; // Limits to 7 byte string of characters
     printf("%s", "Desired rune: "); 
     fgets(runeCompare, 8, stdin); // Gets user input for a fixed-size string
@@ -40,23 +42,18 @@ int main() {
     ////////////////////////////
     
     //Operate on compareString until an element equal to zero is reached
-    int k = 0; 
+    int k = 0;
+    double product = 0;
     while (compareString[k] != 0)
     {
-        double product = pow(x, k + 1);
-        printf("%.0lf\n", product);
+        if (k <= 21) {
+            product = pow(x, k + 1);
+        }
+        else {
+            product = pow(2, k + 1);
+        }
+        printf("%s: %.0lf\n", runeTable[k], product);
         k++;
     }
+    getch();
 }
-
-//Problem: Strncmp behaving poorly. In array[j][k], high k will cause change in j. Actually this isn't true...
-
-    //printf("Strncmp Result between % s and %s is: %d", runeCompare, runeTable[1], strncmp(runeCompare, runeTable[1], 5));
-    //printf("\n\nSizeof runeCompare(stdin): %d", sizeof(runeCompare));
-    //printf("\nSizeof runeTable(Eld): %d\n", sizeof(runeTable[1]));
-    //printf("%c versus %c\n", runeTable[1][2], runeCompare[2]);
-
-    //string_in()
-    //https://stackoverflow.com/questions/18806788/comparing-a-single-string-to-an-array-of-strings-in-c
-
-    //printf("Strncmp for runeTable (%s) vs stdin (%s): %d\n",runeTable[j],runeCompare,compareString);
