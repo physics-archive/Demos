@@ -39,13 +39,13 @@ int main() {
     
     ////////////////////////////
     //  Computational Engine  //
-    ////////////////////////////
-    //Operate conditionally on compareString until an element equal to zero is reached
+    ////////////////////////////    
     
     int k = 0;
     double product = 0;
     double product_sifted = 0;
 
+    //Operate conditionally on compareString until an element equal to zero is reached
     while (compareString[k] != 0 && k < 33)
     {
         if (k <= 21) 
