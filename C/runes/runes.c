@@ -9,7 +9,7 @@ int main() {
     //  Initialize Variables //
     ///////////////////////////
     
-    char version[100] = "Alpha Ver. 03.22.24-03"; 
+    char version[100] = "Alpha Ver. 03.25.24-01"; 
     double p = 0; //2^p or 3^p 
     int compareString[9] = { };
     
@@ -33,7 +33,7 @@ int main() {
     ///////////////////////////
     //     String Compare    //
     ///////////////////////////
-    //Creates a 1x33 array of values equal to -1,0,1; there exists one arr[j]=0 and corresponds to  the user's input
+    //Creates a 1x33 array of values equal to -1,0,1; there exists one arr[j]=0 and corresponds to  the user's input //
     int count = 0;
 
     for (int j = 0; j <= sizeof(runeTable) / sizeof(runeTable[0]) - 1; j = j + 1)
@@ -43,10 +43,6 @@ int main() {
         {
             count++;
         }
-    }
-    if (count != 1) 
-    {
-        goto getUserInput;
     }
     
     ////////////////////////////
