@@ -1,6 +1,7 @@
 ﻿#include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <stdbool.h>
 
 int main() {
 
@@ -24,25 +25,28 @@ int main() {
     "Ral", "Ort", "Thul", "Amn","Sol","Shael","Dol","Hel","Io","Lum",
     "Ko","Fal","Lem","Pul","Um","Mal","Ist","Gul","Vex","Ohm","Lo","Sur",
     "Ber","Jah","Cham","Zod"}; //6x34 array of characters. Static.
-    
-    getUserInput:
-    printf("%s", "Desired rune: "); 
-    fgets(runeCompare, 9, stdin); // Gets user input for a fixed-size string
-    runeCompare[strlen(runeCompare) - 1] = 0; // Trims 'Enter' artefact from runeCompare. Result of fgets.
 
     ///////////////////////////
     //     String Compare    //
     ///////////////////////////
     //Creates a 1x33 array of values equal to -1,0,1; there exists one arr[j]=0 and corresponds to  the user's input //
     int count = 0;
-
-    for (int j = 0; j <= sizeof(runeTable) / sizeof(runeTable[0]) - 1; j = j + 1)
+    while (count == 0) 
     {
-        compareString[j] = strncmp(runeTable[j], runeCompare, 6);
-        if (compareString[j] == 0)
+        printf("%s", "Desired rune: ");
+        fgets(runeCompare, 9, stdin); // Gets user input for a fixed-size string
+        runeCompare[strlen(runeCompare) - 1] = 0; // Trims 'Enter' artefact from runeCompare. Result of fgets.
+
+        if (runeCompare[9] == '\n') 
         {
-            count++;
+            count++
         }
+
+        for (int j = 0; j <= sizeof(runeTable) / sizeof(runeTable[0]) - 1; j = j + 1)
+        {
+            compareString[j] = strncmp(runeTable[j], runeCompare, 6);
+        }
+
     }
     
     ////////////////////////////
